@@ -1,30 +1,29 @@
 import os
 from dotenv import load_dotenv
+from typing import Optional
 
 load_dotenv()
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-API_ID = os.getenv("API_ID")
-API_HASH = os.getenv("API_HASH")
-MONGO_DB_URL = os.getenv("MONGO_DB_URL")
-ADMIN_ID = int(os.getenv("ADMIN_ID"))
-FAIL_CHANNEL_ID = int(os.getenv("FAIL_CHANNEL_ID"))
+BOT_TOKEN: Optional[str] = os.getenv("BOT_TOKEN")
+"""Telegram bot का token."""
 
-if not BOT_TOKEN:
-    print("Error: BOT_TOKEN environment variable not set.")
-    exit()
-if not API_ID:
-    print("Error: API_ID environment variable not set.")
-    exit()
-if not API_HASH:
-    print("Error: API_HASH environment variable not set.")
-    exit()
-if not MONGO_DB_URL:
-    print("Error: MONGO_DB_URL environment variable not set.")
-    exit()
-if not ADMIN_ID:
-    print("Error: ADMIN_ID environment variable not set.")
-    exit()
-if not FAIL_CHANNEL_ID:
-    print("Error: FAIL_CHANNEL_ID environment variable not set.")
-    exit()
+API_ID: Optional[str] = os.getenv("API_ID")
+"""Telegram API ID."""
+
+API_HASH: Optional[str] = os.getenv("API_HASH")
+"""Telegram API hash."""
+
+MONGO_DB_URL: Optional[str] = os.getenv("MONGO_DB_URL")
+"""MongoDB connection URL."""
+
+DATABASE_NAME: Optional[str] = os.getenv("DATABASE_NAME")
+"""MongoDB Database Name."""
+
+ADMIN_ID: Optional[int] = int(os.getenv("ADMIN_ID")) if os.getenv("ADMIN_ID") else None
+"""Admin user का Telegram ID."""
+
+FAIL_CHANNEL_ID: Optional[int] = int(os.getenv("FAIL_CHANNEL_ID")) if os.getenv("FAIL_CHANNEL_ID") else None
+"""Errors और exceptions के लिए Fail channel का ID."""
+
+if not all([BOT_TOKEN, API_ID, API_HASH, MONGO_DB_URL, ADMIN_ID, FAIL_CHANNEL_ID, DATABASE_NAME]):
+    raise ValueError("Missing required environment variables. Please set BOT_TOKEN, API_ID, API_HASH, MONGO_DB_URL, ADMIN_ID, FAIL_CHANNEL_ID and DATABASE_NAME in .env file.")

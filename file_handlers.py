@@ -78,4 +78,5 @@ def process_rename(update: Update, context: CallbackContext) -> str:
 
         args: List[str] = context.args
         if not args or len(args) < 2:
-            update.message.reply_text("Provide filename and metadata.", parse_mode=ParseMode.HTML
+            update.message.reply_text("Provide filename and metadata.", parse_mode=ParseMode.HTML)
+        
